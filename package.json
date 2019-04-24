@@ -1,7 +1,8 @@
 {
-  "name": "node-handlebars-boilerplate",
+  "name": "veritas",
   "version": "1.0.0",
-  "description": "Project 2 Starter",
+  "description": "",
+  "private": true,
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -11,11 +12,13 @@
   },
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "mysql2": "^1.6.4",
-    "sequelize": "^4.41.2"
+    "sequelize": "^4.41.2",
+    "webhoseio": "^1.0.2"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -25,6 +28,18 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.2",
     "mocha": "^5.2.0",
-    "prettier": "^1.13.7"
-  }
+    "morgan": "^1.9.1"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weezie33/Veritas.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/weezie33/Veritas/issues"
+  },
+  "homepage": "https://github.com/weezie33/Veritas#readme"
 }

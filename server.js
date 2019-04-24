@@ -1,15 +1,15 @@
 require("dotenv").config();
-var express = require("express");
-var exphbs = require("express-handlebars");
+const express = require("express");
+const exphbs = require("express-handlebars");
+const bodyParser = require('body-parser')
+const db = require("./models");
 
-var db = require("./models");
-
-var app = express();
-var PORT = process.env.PORT || 3000;
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.static("public"));
 
 // Handlebars
@@ -20,6 +20,11 @@ app.engine(
   })
 );
 app.set("view engine", "handlebars");
+
+if(app.get('env')==='development'){
+  const logger = require('morgan')
+  app.use(logger('dev'));
+}
 
 // Routes
 require("./routes/apiRoutes")(app);
