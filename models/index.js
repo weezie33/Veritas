@@ -17,8 +17,11 @@ if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_local], {
     operatorsAliases: 'Op'
   });
-} else {
-  return;
+} else if (config.use_env_testing) {
+  var sequelize = new Sequelize(process.env[config.use_env_testing], {
+    operatorsAliases: 'Op',
+    logging: false
+  });
 }
 
 fs.readdirSync(__dirname)
