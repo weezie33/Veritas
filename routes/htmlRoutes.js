@@ -2,19 +2,47 @@ var db = require('../models');
 
 module.exports = function(app) {
   // Load index page
-  app.get('/:search', function(req, res) {
+  app.get('/reviews', function(req, res) {
     if (req.params.search === 'favicon.ico') {
       res.redirect('/');
     } else {
-      db.new_search_db
-        .findAll({ where: { search_term: req.params.search } })
+      db.reviews.findAll({}).then(function(result) {
+        // console.log(result);
+        res.render('index', {
+          result
+        });
+      });
+    }
+  });
+  app.get('/reviews/:id', function(req, res) {
+    if (req.params.search === 'favicon.ico') {
+      res.redirect('/');
+    } else {
+      db.reviews
+        .findAll({
+          where: {
+            id: req.params.id
+          }
+        })
         .then(function(result) {
-          console.log(result.dataValues);
-          res.render('index', {
-            msg: req.params.search,
-            search_term: []
+          console.log(result);
+          res.render('dbtest', {
+            result
           });
         });
+    }
+  });
+
+  app.get('/dbtest', function(req, res) {
+    if (req.params.search === 'favicon.ico') {
+      res.redirect('/');
+    } else {
+      db.reviews.findAll({}).then(function(result) {
+        // console.log(result);
+        res.render('dbtest', {
+          result
+        });
+      });
     }
   });
 
