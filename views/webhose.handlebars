@@ -1,3 +1,48 @@
-{{#each output.reviews}}
-{{this}}
-{{/each}}
+<h2>WEBHOSE REVIEWS PAGE</h2>
+
+{{!-- <ul>
+    {{#each reviews}}
+    <li>{{this.item}}</li>
+    <li>{{this.uuid}}</li>
+    <li>{{this.url}}</li>
+    <li>{{this.ord_in_thread}}</li>
+    <li>{{this.author}}</li>
+    <li>{{this.published}}</li>
+    <li>{{this.title}}</li>
+    <li>{{this.text}}</li>
+    <li>{{this.language}}</li>
+    <li>{{this.rating}}</li>
+    <li>{{this.crawled}}</li>
+    {{/each}}
+</ul> --}}
+
+<table>
+    <tr>
+        <th>Item Name</th>
+        <th>SITE</th>
+        <th>URL</th>
+        <th>ORDER IN THREAD</th>
+        <th>AUTHOR</th>
+        <th>PUBLISHED</th>
+        <th>TITLE</th>
+        <th>TEXT</th>
+        <th>LANGUAGE</th>
+        <th>RATING</th>
+        <th>IMAGE</th>
+    </tr>
+    {{#each reviews}}
+    <tr>
+        <td>{{this.item.title}}</td>
+        <td>{{this.item.site}}</td>
+        <td><a href="{{this.url}}">Check it out on {{this.item.site}}</a></td>
+        <td>{{this.ord_in_thread}}</td>
+        <td>{{this.author}}</td>
+        <td>{{this.published}}</td>
+        <td>{{this.title}}</td>
+        <td>{{this.text}}</td>
+        <td>{{this.language}}</td>
+        <td>{{this.rating}} of 5</td>
+        <td><img src="{{this.item.main_image}}" alt="{{this.item.title_full}}"></td>
+    </tr>
+    {{/each}}
+</table>
