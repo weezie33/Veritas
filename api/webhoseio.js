@@ -48,7 +48,28 @@ module.exports = (req, res) => {
             }
           ])
           .then(dbres => {
-            console.log(dbres);
+            console.log(`Successfully logged into ReviewsTable`);
+          });
+        let itemKey = currentKey.item;
+
+        db.products
+          .bulkCreate([
+            {
+              uuid: itemKey.uuid,
+              url: itemKey.url,
+              site: itemKey.site,
+              site_section: itemKey.site_section,
+              title: itemKey.title,
+              published: itemKey.published,
+              reviews_count: itemKey.reviews_count,
+              reviewers_count: itemKey.reviewers_count,
+              country: itemKey.country,
+              spam_score: itemKey.spam_score,
+              main_image: itemKey.main_image
+            }
+          ])
+          .then(dbres => {
+            console.log(`Successfully logged into ProductsTable`);
           });
       }
       // console.log(output['reviews']['published']); // Print the text of the first review publication date
