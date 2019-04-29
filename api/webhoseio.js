@@ -1,6 +1,5 @@
 require('dotenv').config();
 module.exports = (req, res) => {
-  const app = require('../server');
   const db = require('../models');
   const webhoseio = require('webhoseio');
   const moment = require('moment');
@@ -20,14 +19,66 @@ module.exports = (req, res) => {
     return date.valueOf();
   };
   const query_params = {
-    q: 'item.title:' + req.params.item_title + ' ' + STORES + ' ' + 'rating:>0',
+    q:
+      'item.title:' +
+      req.params.item_title +
+      '$' +
+      ' ' +
+      STORES +
+      ' ' +
+      'rating:>0',
     ts: unixTime(),
     sort: 'rating'
   };
+
   client
     .query('reviewFilter', query_params)
     .then(output => {
-      console.log(output.reviews);
+      // console.log(output.reviews);
+      for (const key in output.reviews) {
+        console.log(
+          `${key + 1} = ${JSON.stringify(output.reviews[key], null, 2)}`
+        );
+        let currentKey = output.reviews[key];
+        db.reviews
+          .bulkCreate([
+            {
+              uuid: currentKey.uuid,
+              url: currentKey.url,
+              author: currentKey.author,
+              published: currentKey.published,
+              title: currentKey.title,
+              text: currentKey.text,
+              language: currentKey.language,
+              rating: currentKey.rating,
+              crawled: currentKey.crawled
+            }
+          ])
+          .then(dbres => {
+            console.log(`Successfully logged into ReviewsTable`);
+          });
+        let itemKey = currentKey.item;
+
+        db.products
+          .bulkCreate([
+            {
+              uuid: itemKey.uuid,
+              url: itemKey.url,
+              site: itemKey.site,
+              site_section: itemKey.site_section,
+              title: itemKey.title,
+              published: itemKey.published,
+              reviews_count: itemKey.reviews_count,
+              reviewers_count: itemKey.reviewers_count,
+              country: itemKey.country,
+              spam_score: itemKey.spam_score,
+              main_image: itemKey.main_image
+            }
+          ])
+          .then(dbres => {
+            console.log(`Successfully logged into ProductsTable`);
+          });
+      }
       // console.log(output['reviews']['published']); // Print the text of the first review publication date
       // console.log(output);
       // next();

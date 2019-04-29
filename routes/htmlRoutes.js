@@ -3,6 +3,8 @@ const webhoseio = require('../api/webhoseio');
 const yelp = require('../api/yelp');
 
 module.exports = function(app) {
+  db.products.hasMany(db.reviews, { foreignKey: 'id' });
+  db.reviews.belongsTo(db.products, { foreignKey: 'id' });
   // Load index page
   app.get('/reviews', function(req, res) {
     db.reviews.findAll({}).then(function(result) {
