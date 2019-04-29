@@ -1,132 +1,122 @@
 module.exports = function(sequelize, DataTypes) {
-  var newSearch = sequelize.define("new_search_db", {
-  // "Product Table"
-  // ProductId, Name, Make, Model, Year, Price, Review, Summary, Name, UPC, ISBN, GTIN, MPN, ITF, Brand
-   ProductId: {
+  var newSearch = sequelize.define('products', {
+    // "Product Table"
+    // ProductId, Name, Make, Model, Year, Price, Review, Summary, Name, UPC, ISBN, GTIN, MPN, ITF, Brand
+    uuid: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Name: {
+      allowNull: false
+    },
+    url: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Make: {
+      allowNull: false
+    },
+    site: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Model: {
+      allowNull: false
+    },
+    title: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Year: {
+      allowNull: false
+    },
+    published: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Price: {
+      allowNull: false
+    },
+    reviews_count: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Review: {
+      allowNull: false
+    },
+    reviewers_count: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Summary: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Name: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      },
+      allowNull: false
+    },
     UPC: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         len: [12]
-        }
-      },
+      }
+    },
     ISBN: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         len: [13]
-        }
-      },
+      }
+    },
     GTIN: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         len: [1]
-        }
-      },
+      }
+    },
     MPN: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         len: [1]
-        }
-      },
+      }
+    },
     ITF: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         len: [14]
-        }
-      },
+      }
+    },
     Brand: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      },
+      allowNull: false
+    }
     //"Distributor Table"
     //DistributorId, Name, Quantity, Website, Street, City, State, Country, Distance
-    DistributorId: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Name: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Quantity: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Website: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Street: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    City: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    State: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Country: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      },
-    Distance: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      },
-  ///END///
-    });
+    // DistributorId: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false
+    // },
+    // Name: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false
+    // },
+    // Quantity: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false
+    // },
+    // Website: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false
+    // },
+    // Street: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false
+    // },
+    // City: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false
+    // },
+    // State: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false
+    // },
+    // Country: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false
+    // },
+    // Distance: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false
+    // }
+    ///END///
+  });
   return newSearch;
 };
-
-
 
 // "Product Table"
 // ProductId, Name, Make, Model, Year, Price, Review, Summary, Name, UPC, ISBN, GTIN, MPN, ITF, Brand
 
 // "Distributor Table"
-// DistributorId, Name, Quantity, Website, Street, City, State, Country, Distance 
+// DistributorId, Name, Quantity, Website, Street, City, State, Country, Distance
 
 // https://support.google.com/merchants/answer/160161?hl=en
 
@@ -136,11 +126,8 @@ module.exports = function(sequelize, DataTypes) {
 // "Manufacturer Part Numbers (MPN)"
 // "Interleaved 2 of 5 (ITF-14)"
 
-
 // "JOIN   Table +  Table"
 // ID
-
-
 
 // {
 //       "item": {
