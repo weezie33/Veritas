@@ -14,6 +14,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false
     },
+    site_section: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
     title: {
       type: DataTypes.TEXT,
       allowNull: false
@@ -30,45 +34,57 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    UPC: {
+    country: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        len: [12]
-      }
+      allowNull: false
     },
-    ISBN: {
+    spam_score: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        len: [13]
-      }
+      allowNull: false
     },
-    GTIN: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
-    MPN: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
-    ITF: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        len: [14]
-      }
-    },
-    Brand: {
+    main_image: {
       type: DataTypes.TEXT,
       allowNull: false
     }
+    // UPC: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [12]
+    //   }
+    // },
+    // ISBN: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [13]
+    //   }
+    // },
+    // GTIN: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [1]
+    //   }
+    // },
+    // MPN: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [1]
+    //   }
+    // },
+    // ITF: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [14]
+    //   }
+    // },
+    // Brand: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false
+    // }
     //"Distributor Table"
     //DistributorId, Name, Quantity, Website, Street, City, State, Country, Distance
     // DistributorId: {
