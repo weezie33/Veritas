@@ -1,0 +1,17 @@
+<h2>REVIEWS SAMPLE</h2>
+{{#each result}}
+<ul>
+    <li>ID: {{this.id}}</li>
+    <li>UUID: {{this.uuid}}</li>
+    <li>URL: {{this.url}}</li>
+    <li>AUTHOR: {{this.author}}</li>
+    <li>PUBLISHED AT: {{this.published}}</li>
+    <li>TITLE OF REVIEW: {{this.title}}</li>
+    <li>REVIEW: {{this.text}}</li>
+    <li>LANGUAGE: {{this.language}}</li>
+    <li>RATING: {{this.rating}}</li>
+    <li>API LAST UPDATED ON: {{this.crawled}}</li>
+    <li>CREATED AT: {{this.createdAt}}</li>
+    <li>LAST UPDATE: {{this.updatedAt}}</li>
+</ul>
+{{/each}}
