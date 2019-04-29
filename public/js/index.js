@@ -1,53 +1,54 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $searchTerm = $('#search_term');
+var $exampleDescription = $('#example-description');
+var $submitBtn = $('#submit');
+var $exampleList = $('#example-list');
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  post: function(example) {
+    console.log(example);
     return $.ajax({
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
-      type: "POST",
-      url: "api/examples",
+      type: 'POST',
+      url: 'api/search',
       data: JSON.stringify(example)
     });
   },
-  getExamples: function() {
+  get: function() {
     return $.ajax({
-      url: "api/examples",
-      type: "GET"
+      url: 'api/examples',
+      type: 'GET'
     });
   },
-  deleteExample: function(id) {
+  delete: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
-      type: "DELETE"
+      url: 'api/examples/' + id,
+      type: 'DELETE'
     });
   }
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshExamples = function() {
-  API.getExamples().then(function(data) {
+  API.get().then(function(data) {
     var $examples = data.map(function(example) {
-      var $a = $("<a>")
+      var $a = $('<a>')
         .text(example.text)
-        .attr("href", "/example/" + example.id);
+        .attr('href', '/example/' + example.id);
 
-      var $li = $("<li>")
+      var $li = $('<li>')
         .attr({
-          class: "list-group-item",
-          "data-id": example.id
+          class: 'list-group-item',
+          'data-id': example.id
         })
         .append($a);
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+      var $button = $('<button>')
+        .addClass('btn btn-danger float-right delete')
+        .text('ｘ');
 
       $li.append($button);
 
@@ -65,21 +66,21 @@ var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+    search_term: $searchTerm.val().trim(),
+    description: $exampleDescription.val  ().trim()
   };
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
+  if (!(example.search_term && example.description)) {
+    alert('You must enter an example text and description!');
     return;
   }
 
-  API.saveExample(example).then(function() {
+  API.post(example).then(function() {
     refreshExamples();
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
+  $searchTerm.val('');
+  $exampleDescription.val('');
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -87,13 +88,13 @@ var handleFormSubmit = function(event) {
 var handleDeleteBtnClick = function() {
   var idToDelete = $(this)
     .parent()
-    .attr("data-id");
+    .attr('data-id');
 
-  API.deleteExample(idToDelete).then(function() {
+  API.delete(idToDelete).then(function() {
     refreshExamples();
   });
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$submitBtn.on('click', handleFormSubmit);
+$exampleList.on('click', '.delete', handleDeleteBtnClick);
