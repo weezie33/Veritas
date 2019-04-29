@@ -14,10 +14,15 @@ module.exports = (req, res, next) => {
     ts: '1553535891983',
     sort: 'rating'
   };
-  client.query('reviewFilter', query_params).then(output => {
-    console.log(output['reviews']['text']); // Print the text of the first review
-    console.log(output['reviews']['published']); // Print the text of the first review publication date
-    res.send(output['reviews']['text']);
-  });
+  client
+    .query('reviewFilter', query_params)
+    .then(output => {
+      console.log(output['reviews']['text']); // Print the text of the first review
+      console.log(output['reviews']['published']); // Print the text of the first review publication date
+      res.send(output['reviews']['text']);
+    })
+    .catch(err => {
+      if (err) throw err;
+    });
   next();
 };
