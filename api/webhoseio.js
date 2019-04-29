@@ -19,7 +19,14 @@ module.exports = (req, res) => {
     return date.valueOf();
   };
   const query_params = {
-    q: 'item.title:' + req.params.item_title + ' ' + STORES + ' ' + 'rating:>0',
+    q:
+      'item.title:' +
+      req.params.item_title +
+      '$' +
+      ' ' +
+      STORES +
+      ' ' +
+      'rating:>0',
     ts: unixTime(),
     sort: 'rating'
   };
