@@ -2,16 +2,19 @@ var db = require('../models');
 const webhoseio = require('../api/webhoseio');
 
 module.exports = function(app) {
-  app.get('/api/search/:search', function(req, res) {
-    db.new_search_db
+  db.products.hasMany(db.reviews, { foreignKey: 'id' });
+  db.reviews.belongsTo(db.products, { foreignKey: 'id' });
+
+  app.get('/api/search/:id', function(req, res) {
+    db.reviews
       .findAll({
         where: {
-          productName: req.params.search
-        }
+          id: req.params.id
+        },
+        include: [db.products]
       })
       .then(results => {
         console.log(results);
-        res.redirect('/api/search/select', 304);
       })
       .catch(err => {
         setTimeout(() => {

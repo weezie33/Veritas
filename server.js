@@ -3,7 +3,6 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const db = require('./models');
-const moment = require('moment');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -38,15 +37,6 @@ var syncOptions = { force: false };
 if (process.env.NODE_ENV === 'test') {
   syncOptions.force = true;
 }
-
-// let thirtyDaysAgo = () => {
-//   let days = moment()
-//     .subtract(30, 'days')
-//     .calendar();
-//   let date = new Date(days);
-//   return date.valueOf() / 10;
-// };
-// console.log(thirtyDaysAgo());
 
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function() {

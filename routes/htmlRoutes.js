@@ -1,32 +1,54 @@
 var db = require('../models');
+const webhoseio = require('../api/webhoseio');
+const yelp = require('../api/yelp');
 
 module.exports = function(app) {
   // Load index page
-  app.get('/:search', function(req, res) {
+  app.get('/reviews', function(req, res) {
+    db.reviews.findAll({}).then(function(result) {
+      res.render('index', {
+        result
+      });
+    });
+  });
+  app.get('/reviews/:id', function(req, res) {
+    db.reviews
+      .findAll({
+        where: {
+          id: req.params.id
+        }
+      })
+      .then(function(result) {
+        console.log(result);
+        res.render('dbtest', {
+          result
+        });
+      });
+  });
+
+  app.get('/dbtest', function(req, res) {
     if (req.params.search === 'favicon.ico') {
       res.redirect('/');
     } else {
-      db.new_search_db
-        .findAll({ where: { search_term: req.params.search } })
-        .then(function(result) {
-          console.log(result.dataValues);
-          res.render('index', {
-            msg: req.params.search,
-            search_term: []
-          });
+      db.reviews.findAll({}).then(function(result) {
+        // console.log(result);
+        res.render('dbtest', {
+          result
         });
+      });
     }
   });
 
-  // Load example page and pass in an example by id
-  app.get('/example/:id', function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.render('example', {
-        example: dbExample
-      });
-    });
+  app.get('/', function(req, res) {
+    res.render('index');
+  });
+
+  app.get('/search/:item_title', function(req, res) {
+    webhoseio(req, res);
+  });
+
+  app.get('/yelp/:name/:location', (req, res) => {
+    yelp(req, res);
   });
 
   // Render 404 page for any unmatched routes
@@ -34,3 +56,9 @@ module.exports = function(app) {
     res.render('404');
   });
 };
+
+//TODO
+/* 
+* change the 'dbtest'
+
+*/
