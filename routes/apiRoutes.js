@@ -59,6 +59,10 @@ module.exports = function(app) {
       });
   });
 
+  app.get('/api/yelp/:name/:location', (req, res) => {
+    yelp(req, res);
+  });
+
   // this would allow you to post, all it needs is key "item_title"
   app.post('/api/search/', webhoseio, function(req, res) {
     //doesn't need to do anything, request literally goes thru the webhoseio as middleware
