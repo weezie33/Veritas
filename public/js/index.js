@@ -1,6 +1,5 @@
 // Get references to page elements
-var $searchTerm = $('#search_term');
-var $exampleDescription = $('#example-description');
+var $searchTerm = $('#item_title');
 var $submitBtn = $('#submit');
 var $exampleList = $('#example-list');
 
@@ -13,7 +12,7 @@ var API = {
         'Content-Type': 'application/json'
       },
       type: 'POST',
-      url: 'api/search',
+      url: '/api/search',
       data: JSON.stringify(example)
     });
   },
@@ -66,11 +65,10 @@ var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var example = {
-    search_term: $searchTerm.val().trim(),
-    description: $exampleDescription.val  ().trim()
+    item_title: $searchTerm.val().trim(),
   };
 
-  if (!(example.search_term && example.description)) {
+  if (!(example.item_title)) {
     alert('You must enter an example text and description!');
     return;
   }
@@ -80,7 +78,7 @@ var handleFormSubmit = function(event) {
   });
 
   $searchTerm.val('');
-  $exampleDescription.val('');
+
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
