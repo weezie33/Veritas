@@ -20,12 +20,16 @@ module.exports = function(app) {
         include: [db.products]
       })
       .then(results => {
-        res.json(results);
+        if (results.length > 0) {
+          res.json(results);
+        } else {
+          let qErr = `Sorry, ID ${req.body.id ||
+            req.params.id} could not be found`;
+          res.redirect('/404?qErr=' + qErr);
+        }
       })
       .catch(err => {
-        let qErr = `Sorry, ID ${req.body.id ||
-          req.params.id} could not be found`;
-        res.redirect('/404?qErr=' + qErr);
+        throw err;
       });
   });
 
@@ -39,8 +43,14 @@ module.exports = function(app) {
         include: [db.products] //<-- this includes products INTO reviews
       })
       .then(results => {
-        let productJSON = results[0].product.dataValues;
-        res.json(productJSON);
+        if (results.length > 0) {
+          let productJSON = results[0].product.dataValues;
+          res.json(productJSON);
+        } else {
+          let qErr = `Sorry, ID ${req.body.id ||
+            req.params.id} could not be found`;
+          res.redirect('/404?qErr=' + qErr);
+        }
       })
       .catch(err => {
         let qErr = `Sorry, ID ${req.body.id ||
