@@ -21,13 +21,10 @@
 
   <div class="container" style="margin-top:30px">
     <div class="row row-centered">
-          <form class="col-sm-12 col-centered" action="POST">
-            <div class="form-group">
-              <label for="example-text"><b>Find Your Item</b></label>
-              <input type="text" id="item_title" class="form-control col-sm-4" aria-describedby="example-text" placeholder="Text">
-            </div>
+          <div class="col-sm-12 col-centered" action="POST">
+            <div id="userSearchResults">{{}}</div>
             <button id="submit" class="btn btn-primary">Submit</button>
-          </form>
+          </div>
   
     </div>
   </div>
@@ -45,3 +42,4 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
+<script src="./api/mapbox.js"></script>
