@@ -1,68 +1,45 @@
+
 // Get references to page elements
 var $searchTerm = $('#item_title');
 var $submitBtn = $('#submit');
 var $exampleList = $('#example-list');
 
-// The API object contains methods for each kind of request we'll make
-var API = {
-  post: function(example) {
-    console.log(example);
+const API = {
+  post: function(info) {
     return $.ajax({
       headers: {
         'Content-Type': 'application/json'
       },
       type: 'POST',
+
       url: '/api/search',
       data: JSON.stringify(example)
+
     });
   },
   get: function() {
     return $.ajax({
-      url: 'api/examples',
+      url: '', //FILL IT IN
       type: 'GET'
     });
   },
   delete: function(id) {
     return $.ajax({
-      url: 'api/examples/' + id,
+      url: '' + id, //FILL IT IN
       type: 'DELETE'
     });
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.get().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $('<a>')
-        .text(example.text)
-        .attr('href', '/example/' + example.id);
+// const contentRefresh = function(){
+//     API.get().then(data=>{
+//         var
+//     })
+// }
 
-      var $li = $('<li>')
-        .attr({
-          class: 'list-group-item',
-          'data-id': example.id
-        })
-        .append($a);
-
-      var $button = $('<button>')
-        .addClass('btn btn-danger float-right delete')
-        .text('ｘ');
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
-
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
+const handleFormSubmit = event => {
   event.preventDefault();
+
 
   var example = {
     item_title: $searchTerm.val().trim(),
@@ -79,20 +56,6 @@ var handleFormSubmit = function(event) {
 
   $searchTerm.val('');
 
+
+
 };
-
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr('data-id');
-
-  API.delete(idToDelete).then(function() {
-    refreshExamples();
-  });
-};
-
-// Add event listeners to the submit and delete buttons
-$submitBtn.on('click', handleFormSubmit);
-$exampleList.on('click', '.delete', handleDeleteBtnClick);
