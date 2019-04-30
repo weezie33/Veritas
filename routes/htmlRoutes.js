@@ -50,11 +50,16 @@ module.exports = function(app) {
   app.get('/yelp/:name/:location', (req, res) => {
     yelp(req, res);
   });
+  // Render mapbox
+  app.get('/mapbox', function(req, res) {
+    res.render('mapbox');
+  });
 
   // Render 404 page for any unmatched routes
   app.get('*', function(req, res) {
     res.render('404');
   });
+
 };
 
 //TODO
