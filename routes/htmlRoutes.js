@@ -56,14 +56,14 @@ module.exports = function(app) {
   });
 
   // Render 404 page for any unmatched routes
-  // app.get('*', function(req, res) {
-  //   res.render('404');
-  // });
+  app.get('*', function(req, res) {
+    res.render('404');
+  });
 
-  //sets up query variables to 404
-  // app.get('/404', function(req, res) {
-  //   let qErr = req.query.qErr;
-  //   console.log(req.query);
-  //   res.render('404', { qErr });
-  // });
+  // sets up query variables to 404
+  app.get('/404', function(req, res) {
+    let qErr = req.query.qErr;
+    console.log(req.query);
+    res.render('404', { qErr });
+  });
 };
