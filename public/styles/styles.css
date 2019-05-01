@@ -24,10 +24,10 @@ body {
   background: #ffffff;
   background-image: var(--primary-gradiant);
   background-size: auto;
-  font-family: 'Exo', sans-serif;
+  font-family: 'Exo', sans-serif !important;
 }
 #brand {
-  font-family: 'Cormorant Unicase', serif;
+  color: blue;
   font-size: 2rem;
 }
 .container {
