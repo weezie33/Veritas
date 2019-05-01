@@ -1,10 +1,14 @@
 <div class="card-deck">
     <div class="row">
-        {{#each result}}
+        {{#each reviews}}
         <div class="col-md-3">
             <div class="card ml-auto mr-auto mt-3">
+                {{#if this.item.main_image}}
+                <img src="{{this.item.main_image}}" class="card-img-top" alt="{{this.item.title}} image"
+                    style="height:200px;">
+                {{/if}}
                 <div class="card-body">
-                    <h3 class="card-title leading"><i class="fas fa-caret-right"></i> {{this.title}}</h3>
+                    <h3 class="card-title leading"><i class="fas fa-caret-right"></i> {{this.item.title}}</h3>
                     <p> <i class="fas fa-star">
                             {{this.rating}}</i></p>
                     <p class="card-text"><i class="fas fa-comment-alt"></i> {{this.text}}</p>
@@ -12,6 +16,7 @@
 
                 </div>
                 <div class="card-footer">
+                    <small>From: <a href="http://{{this.item.site}}">{{this.item.site}}</a></small>
                     <small class="text-muted">Last updated {{this.updatedAt}}</small>
                 </div>
             </div>
