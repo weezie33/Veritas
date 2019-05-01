@@ -1,4 +1,4 @@
-# Verita$(https://show-me-veritas.herokuapp.com/)
+# [Verita$](https://show-me-veritas.herokuapp.com/)
 
 ## Overview
 Positioning Statement
