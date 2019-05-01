@@ -1,0 +1,22 @@
+{{> reviewSearch}}
+<div class="card-deck">
+    <div class="row">
+        {{#each result}}
+        <div class="col-md-3">
+            <div class="card ml-auto mr-auto mt-3">
+                <div class="card-body">
+                    <h3 class="card-title leading"><i class="fas fa-caret-right"></i> {{this.title}}</h3>
+                    <p> <i class="fas fa-star">
+                            {{this.rating}}</i></p>
+                    <p class="card-text"><i class="fas fa-comment-alt"></i> {{this.text}}</p>
+                    <h4 class="card-text h5"><i class="fas fa-user-edit"> {{this.author}}</i></h4>
+
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated {{this.updatedAt}}</small>
+                </div>
+            </div>
+        </div><br />
+        {{/each}}
+    </div>
+</div>

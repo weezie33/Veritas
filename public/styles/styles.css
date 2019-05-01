@@ -1,38 +1,60 @@
-
-
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Unicase|Exo|Press+Start+2P');
+:root {
+  --primary-gradiant: radial-gradient(
+    circle,
+    #c1cb07,
+    #82db5d,
+    #33e39e,
+    #00e6d6,
+    #04e4fc
+  );
+  --secondary-gradiant: radial-gradient(
+    circle,
+    #c2c4be,
+    #a5a9a5,
+    #8a8f8c,
+    #707574,
+    #585c5c
+  );
+}
+html,
 body {
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   background: #ffffff;
-  background-image: radial-gradient(circle, #c1cb07, #82db5d, #33e39e, #00e6d6, #04e4fc);
-  
+  background-image: var(--primary-gradiant);
   background-size: auto;
+  font-family: 'Exo', sans-serif;
+}
+#brand {
+  font-family: 'Cormorant Unicase', serif;
+  font-size: 2rem;
 }
 .container {
   margin: auto;
-  width: 50%;
+  width: 100%;
 }
 .row-centered {
-    text-align:center;
+  text-align: center;
 }
 .jumbotron {
-  background-image: radial-gradient(circle, #c2c4be, #a5a9a5, #8a8f8c, #707574, #585c5c);
+  background-image: var(--secondary-gradiant);
   text-align: center;
 }
 input {
   margin: auto;
 }
-#submit {
-  background-image: radial-gradient(circle, #c2c4be, #a5a9a5, #8a8f8c, #707574, #585c5c);
-  color: black;
-}
-
+#submit,
 .navbar {
-  background-image: radial-gradient(circle, #c2c4be, #a5a9a5, #8a8f8c, #707574, #585c5c);
+  background-image: var(--secondary-gradiant);
   color: black;
 }
 
 .footer-copyright {
-  background-image: radial-gradient(circle, #c2c4be, #a5a9a5, #8a8f8c, #707574, #585c5c) !important;
+  background-image: var(--secondary-gradiant);
   max-height: 200px;
+}
+
+.fourohfour {
+  font-family: 'Press Start 2P', cursive;
 }

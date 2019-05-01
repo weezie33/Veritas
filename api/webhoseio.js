@@ -86,7 +86,9 @@ module.exports = (req, res) => {
         }
 
         let reviews = output.reviews;
-        res.render('webhose', { reviews });
+        console.log(reviews);
+        // console.log(output);
+        res.render('products', { reviews });
         return next();
       })
       .catch(err => {
