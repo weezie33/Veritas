@@ -9,6 +9,10 @@ module.exports = (req, res) => {
     term: req.params.name,
     location: req.params.location
   };
+
+  if ((req.params.location = '' || !req.params.location)) {
+    businessTerm.location = 'washington,dc';
+  }
   client
     .search(businessTerm)
     .then(busiName => {

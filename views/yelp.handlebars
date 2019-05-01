@@ -1,5 +1,5 @@
-<h2>YELP BUSINESS DETAILS</h2>
-<ul>
+<h2 class="text-center mt-3 leading">YELP BUSINESS DETAILS</h2>
+{{!-- <ul class="m-5">
     <li><img src="{{idJSON.image_url}}" alt="{{idJSON.alias}}"></li>
     <li>Business Name: {{idJSON.name}}</li>
     <li>Yelp Page: <a target="_blank" href="{{idJSON.url}}">Click here to visit!</a></li>
@@ -8,4 +8,26 @@
     <li>Current Rating: {{idJSON.rating}}/5</li>
     <li>Coordinates: {{idJSON.coordinates.latitude}} {{idJSON.coordinates.longitude}}</li>
     <li>Yelp ID: {{idJSON.id}}</li>
-</ul>
+</ul> --}}
+
+
+
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card ml-auto mr-auto mt-3">
+            <img src="{{idJSON.image_url}}" class="card-img-top" alt="{{idJSON.alias}} image">
+            <div class="card-body">
+                <h3 class="card-title leading"><i class="fas fa-caret-right"></i> Business Name: {{idJSON.name}}</h3>
+                <p> Yelp Page: <a target="_blank" href="{{idJSON.url}}">Click here to visit!</a>
+                    <p class="card-text">Business Phone#: {{idJSON.display_phone}}<br>
+                        Amount of reviews: {{idJSON.review_count}}<br>
+                        Current Rating: {{idJSON.rating}} out of 5</p>
+                    <h4 class="card-text h5">Yelp ID: {{idJSON.id}}</h4>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated {{this.updatedAt}}</small>
+            </div>
+        </div>
+    </div><br />
+</div>

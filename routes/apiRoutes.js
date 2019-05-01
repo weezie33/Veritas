@@ -61,6 +61,9 @@ module.exports = function(app) {
   });
 
   app.get('/api/yelp/:name/:location', (req, res) => {
+    if ((req.params.location = '' || !req.params.location)) {
+      req.body.location = 'washington,dc';
+    }
     yelp(req, res);
   });
 
