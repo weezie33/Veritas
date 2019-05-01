@@ -1,5 +1,6 @@
 var db = require('../models');
 const webhoseio = require('../api/webhoseio');
+const yelp = require('../api/yelp');
 
 module.exports = function(app) {
   db.products.hasMany(db.reviews, { foreignKey: 'id' });
