@@ -1,4 +1,5 @@
 'use strict';
+
 require('dotenv').config();
 module.exports = (req, res) => {
   const db = require('../models');
@@ -13,6 +14,7 @@ module.exports = (req, res) => {
   if ((req.params.location = '' || !req.params.location)) {
     businessTerm.location = 'washington,dc';
   }
+
   client
     .search(businessTerm)
     .then(busiName => {
@@ -37,7 +39,7 @@ module.exports = (req, res) => {
               longitude: idJSON.coordinates.longitude
             }
           ])
-          .then(dbres => {
+          .then(() => {
             console.log(`Yelp info has been logged to YelpTable`);
           });
         res.render('yelp', { idJSON });

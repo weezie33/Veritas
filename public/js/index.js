@@ -1,11 +1,11 @@
 // Get references to page elements
+var $;
 var $searchTerm = $('#item_title');
-var $submitBtn = $('#submit');
-var $exampleList = $('#example-list');
+// var $submitBtn = $('#submit');
+// var $exampleList = $('#example-list');
 
 const API = {
   post: function(info) {
-    console.log(info);
     return $.ajax({
       headers: {
         'Content-Type': 'application/json'

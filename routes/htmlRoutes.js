@@ -1,6 +1,5 @@
 var db = require('../models');
-const webhoseio = require('../api/webhoseio');
-const yelp = require('../api/yelp');
+
 const Op = require('sequelize').Op;
 
 module.exports = function(app) {
@@ -8,7 +7,7 @@ module.exports = function(app) {
   db.reviews.belongsTo(db.products, { foreignKey: 'id' });
 
   //searches the DB for a specific review/product by keywords
-  app.get('/app/reviews/search/:reviewFetch', function(req, res) {
+  app.get('/app/reviews/search/:reviewFetch', (req, res) => {
     db.reviews
       .findAll({
         where: {
@@ -23,9 +22,9 @@ module.exports = function(app) {
         if (result.length > 0) {
           res.render('reviews', { result });
         } else {
-          let qErr = `Sorry, ID ${req.body.id ||
-            req.params.id} could not be found`;
-          res.redirect('/404?qErr=' + qErr);
+          res.redirect(
+            `/404?qErr=Sorry,ID${req.body.id || req.params.id}couldnotbefound`
+          );
         }
       })
       .catch(err => {
@@ -34,7 +33,7 @@ module.exports = function(app) {
   });
 
   // Loads the reviews page, should be in apiRoutes
-  app.get('/app/reviews/', function(req, res) {
+  app.get('/app/reviews/', (req, res) => {
     db.reviews.findAll({}).then(function(result) {
       res.render('reviews', {
         result
@@ -42,7 +41,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/app/products', function(req, res) {
+  app.get('/app/products', (req, res) => {
     db.products.findAll({}).then(function(result) {
       res.render('products', {
         result
@@ -56,14 +55,13 @@ module.exports = function(app) {
   });
 
   // Render 404 page for any unmatched routes
-  app.get('*', function(req, res) {
+  app.get('*', (req, res) => {
     res.render('404');
   });
 
   // sets up query variables to 404
   app.get('/404', function(req, res) {
     let qErr = req.query.qErr;
-    console.log(req.query);
     res.render('404', { qErr });
   });
 };

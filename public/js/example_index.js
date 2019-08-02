@@ -1,4 +1,6 @@
 // Get references to page elements
+var $;
+
 var $searchTerm = $('#search_term');
 var $exampleDescription = $('#example-description');
 var $submitBtn = $('#submit');
@@ -67,7 +69,7 @@ var handleFormSubmit = function(event) {
 
   var example = {
     search_term: $searchTerm.val().trim(),
-    description: $exampleDescription.val  ().trim()
+    description: $exampleDescription.val().trim()
   };
 
   if (!(example.search_term && example.description)) {

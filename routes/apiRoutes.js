@@ -7,12 +7,12 @@ module.exports = function(app) {
   db.reviews.belongsTo(db.products, { foreignKey: 'id' });
 
   //searches the webhoseAPI for the specified product
-  app.get('/app/search/:item_title', function(req, res) {
+  app.get('/app/search/:item_title', (req, res) => {
     webhoseio(req, res);
   });
 
   //searches the DB for a specific review/product by ID
-  app.get('/api/reviews/:id', function(req, res) {
+  app.get('/api/reviews/:id', (req, res) => {
     db.reviews
       .findAll({
         where: {
@@ -35,7 +35,7 @@ module.exports = function(app) {
   });
 
   //searches the DB by ID for both reviews/products and returns a JSON of the product
-  app.get('/api/products/:id', function(req, res) {
+  app.get('/api/products/:id', (req, res) => {
     db.reviews
       .findAll({
         where: {
@@ -54,6 +54,7 @@ module.exports = function(app) {
         }
       })
       .catch(err => {
+        if (err) throw err;
         let qErr = `Sorry, ID ${req.body.id ||
           req.params.id} could not be found`;
         res.redirect('/404?qErr=' + qErr);
@@ -68,35 +69,35 @@ module.exports = function(app) {
   });
 
   // this would allow you to post, all it needs is key "item_title"
-  app.post('/api/search/', webhoseio, function(req, res) {
-    //doesn't need to do anything, request literally goes thru the webhoseio as middleware
-  });
+  //doesn't need to do anything, web traffic literally goes thru the webhoseio file
+  app.post('/api/search/', webhoseio);
 
   // Delete an product/review by id
-  app.delete('/api/kill/:id', function(req, res) {
+  app.delete('/api/kill/:id', (req, res) => {
     db.reviews
       .destroy({ where: { id: req.params.id }, include: [db.products] })
       .then(dbres => {
         switch (dbres) {
           case 0:
-            let qErrZero = `Sorry, ID ${req.body.id ||
-              req.params.id} could not be found`;
-            res.redirect('/404?qErr=' + qErrZero);
+            res.redirect(
+              `/404?qErr=Sorry,ID${req.body.id || req.params.id}couldnotbefound`
+            );
             break;
           case 1:
             res.json(`Succesfully deleted id ${req.params.id || req.body.id}`);
             break;
           default:
-            let qErr = `Sorry, ID ${req.body.id ||
-              req.params.id} could not be found`;
-            res.redirect('/404?qErr=' + qErr);
+            res.redirect(
+              `/404?qErr=Sorry,ID${req.body.id || req.params.id}couldnotbefound`
+            );
             break;
         }
       })
       .catch(err => {
-        let qErr = `Sorry, ID ${req.body.id ||
-          req.params.id} could not be found`;
-        res.redirect('/404?qErr=' + qErr);
+        if (err) throw err;
+        res.redirect(
+          `/404?qErr=Sorry,ID${req.body.id || req.params.id}couldnotbefound`
+        );
       });
   });
 };

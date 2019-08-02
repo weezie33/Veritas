@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// Handlebars
+// View Engine - Handlebars
 app.engine(
   'handlebars',
   exphbs({
@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'test') {
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function() {
   app.listen(PORT, function() {
-    console.log('Listening on http://localhost:%s/', PORT, PORT);
+    console.log('Listening on http://localhost:%s/', PORT);
   });
 });
 

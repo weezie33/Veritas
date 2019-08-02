@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 module.exports = (req, res) => {
   const db = require('../models');
   const webhoseio = require('webhoseio');
@@ -18,6 +18,7 @@ module.exports = (req, res) => {
     let date = new Date(days);
     return date.valueOf();
   };
+
   if (req.params.item_title || req.body.item_title) {
     const query_params = {
       q:
@@ -35,11 +36,7 @@ module.exports = (req, res) => {
     client
       .query('reviewFilter', query_params)
       .then(output => {
-        // console.log(output.reviews);
         for (const key in output.reviews) {
-          console.log(
-            `${key + 1} = ${JSON.stringify(output.reviews[key], null, 2)}`
-          );
           let currentKey = output.reviews[key];
           db.reviews
             .bulkCreate([
@@ -55,11 +52,12 @@ module.exports = (req, res) => {
                 crawled: currentKey.crawled
               }
             ])
-            .then(dbres => {
-              console.log(
-                `${new Date()} Successfully logged into ReviewsTable`
-              );
+            .then(() => {
+              // console.log(
+              //   `${new Date()} Successfully logged into ReviewsTable`
+              // );
             });
+
           let itemKey = currentKey.item;
 
           db.products
@@ -78,18 +76,15 @@ module.exports = (req, res) => {
                 main_image: itemKey.main_image
               }
             ])
-            .then(dbres => {
-              console.log(
-                `${new Date()} Successfully logged into ProductsTable`
-              );
+            .then(() => {
+              // console.log(
+              //   `${new Date()} Successfully logged into ProductsTable`
+              // );
             });
         }
 
         let reviews = output.reviews;
-        console.log(reviews);
-        // console.log(output);
         res.render('products', { reviews });
-        return next();
       })
       .catch(err => {
         if (err) throw err;
