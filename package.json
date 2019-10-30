@@ -20,7 +20,7 @@
     "mapbox-gl": "^1.2.0",
     "moment": "^2.24.0",
     "mysql2": "^1.6.5",
-    "sequelize": "^5.12.2",
+    "sequelize": "^5.15.1",
     "webhoseio": "^1.0.2",
     "yelp-fusion": "^3.0.0"
   },
